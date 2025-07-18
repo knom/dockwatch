@@ -40,22 +40,22 @@ It then sends webhook notifications including container metadata and recent logs
 
     a) Via plain Docker
 
-        ```bash
-        docker build -t dockwatch .
+    ```bash
+    docker build -t dockwatch .
 
-        docker run -d \
-        -v /var/run/docker.sock:/var/run/docker.sock \
-        -e WEBHOOK_URL="https://your-webhook.url/endpoint" \
-        -e LOGLEVEL="INFO" \
-        --name dockwatch \
-        dockwatch
-        ```
+    docker run -d \
+    -v /var/run/docker.sock:/var/run/docker.sock \
+    -e WEBHOOK_URL="https://your-webhook.url/endpoint" \
+    -e LOGLEVEL="INFO" \
+    --name dockwatch \
+    dockwatch
+    ```
 
     b) Via Docker Compose (compose file included in the repo)
 
-        ```bash
-        docker compose up -d
-        ```
+    ```bash
+    docker compose up -d
+    ```
 ---
 
 ## Usage
@@ -94,3 +94,14 @@ When a Docker event is triggered on a labeled container **DockWatch** sends a PO
   "finished_at": "0001-01-01T00:00:00Z",
   "logs": "Last 10 lines of container logs..."
 }
+```
+
+### Field Descriptions
+
+| Field            | Type             | Description                                                                 |
+|------------------|------------------|-----------------------------------------------------------------------------|
+| `container_name` | `string`         | Name of the container that triggered the event.                             |
+| `status`         | `string`         | One of: `"start"`, `"stop"`, `"healthy"`, `"unhealthy"`.                    |
+| `started_at`     | `string (ISO 8601)` | Timestamp when the container was started.                                  |
+| `finished_at`    | `string (ISO 8601)` | Timestamp when the container stopped (if available).                        |
+| `logs`           | `string`         | The last 10 lines of container logs. Returns `"No logs available"` if none. |
