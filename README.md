@@ -105,3 +105,19 @@ When a Docker event is triggered on a labeled container **DockWatch** sends a PO
 | `started_at`     | `string (ISO 8601)` | Timestamp when the container was started.                                  |
 | `finished_at`    | `string (ISO 8601)` | Timestamp when the container stopped (if available).                        |
 | `logs`           | `string`         | The last 10 lines of container logs. Returns `"No logs available"` if none. |
+
+---
+
+## Log Levels
+
+You can control the verbosity of logging output by setting the `LOGLEVEL` environment variable.
+
+### Supported Levels
+
+| Level       | Description                                                                 |
+|-------------|-----------------------------------------------------------------------------|
+| `DEBUG`     | Most verbose. Shows detailed diagnostic information for development/debugging. |
+| `INFO`      | General operational messages (default).                                     |
+| `WARNING`   | Indicates potential issues that don't stop execution.                       |
+| `ERROR`     | Logs runtime errors that may affect functionality.                          |
+| `CRITICAL`  | Logs severe errors that likely require immediate attention.                 |
