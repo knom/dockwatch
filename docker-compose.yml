@@ -1,0 +1,12 @@
+services:
+  watch:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: watch
+    restart: always
+    environment:
+      - WEBHOOK_URL=https://some-host/webhook/12345
+      - LOGLEVEL=INFO
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock:ro
